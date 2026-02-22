@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 50px 20px;
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #fff;
+            text-shadow: 2px 2px 5px #ff6f91;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery img {
+            width: 250px;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .message {
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.2);
+            margin: 20px;
+            border-radius: 20px;
+            font-size: 1.5em;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .love-note {
+            margin: 20px auto;
+            max-width: 500px;
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .love-note textarea {
+            width: 90%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            font-size: 1em;
+        }
+
+        .love-note button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #ff6f91;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .love-note button:hover {
+            background: #ff3f6b;
+        }
+
+        footer {
+            padding: 20px;
+            background: rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 1em;
+            text-shadow: 1px 1px 2px #ff6f91;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(-45deg);
+            animation: float 5s linear infinite;
+            left: 50%;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50px, -800px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery img {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>To My Love ❤️</h1>
+        <p>You are my sunshine, my happiness, and my everything.</p>
+    </header>
+
+    <section class="gallery">
+        <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Romantic Flower 1">
+        <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3" alt="Romantic Flower 2">
+        <img src="https://images.unsplash.com/photo-1518972559570-5c7e13a53d0b" alt="Romantic Flower 3">
+    </section>
+
+    <section class="message">
+        <p>Every moment with you is a beautiful memory. I promise to love you today, tomorrow, and forever.</p>
+    </section>
+
+    <section class="love-note">
+        <h2>Send Me a Love Note 💌</h2>
+        <textarea placeholder="Write your message here..."></textarea><br>
+        <button onclick="sendLoveNote()">Send ❤️</button>
+        <p id="thankYou" style="color: #fff; margin-top: 10px;"></p>
+    </section>
+
+    <footer>
+        Made with ❤️ by Me
+    </footer>
+
+    <!-- Background Music -->
+    <audio id="loveSong" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button onclick="toggleMusic()" style="position:fixed;top:20px;right:20px;padding:10px 15px;border:none;border-radius:10px;background:#ff6f91;color:#fff;cursor:pointer;z-index:2;">Play/Pause Music</button>
+
+    <script>
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Love note
+        function sendLoveNote() {
+            const textarea = document.querySelector('.love-note textarea');
+            const thankYou = document.getElementById('thankYou');
+            if(textarea.value.trim() !== "") {
+                thankYou.textContent = "Your love note has been sent! ❤️";
+                textarea.value = "";
+            } else {
+                thankYou.textContent = "Please write something first!";
+            }
+        }
+
+        // Music
+        const loveSong = document.getElementById('loveSong');
+        function toggleMusic() {
+            if(loveSong.paused) {
+                loveSong.play();
+            } else {
+                loveSong.pause();
+            }
+        }
+    </script>
+
+</body>
+</html>
